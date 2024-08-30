@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Sidebar from "./components/SIdebar"
 import './App.css';
+import { Button } from '@mui/material';
 
-function App() {
+const App = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [selectedSpeakers, setSelectedSpeakers] = useState([]);
+
+  const handleAddSpeaker = () => {
+    setIsSidebarOpen(true);
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
+  const handleSave = () => {
+    console.log('Selected Speakers:', selectedSpeakers);
+    setIsSidebarOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {/* <Button variant="contained" onClick={handleAddSpeaker}>
+        Add Speaker
+      </Button> */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={handleCloseSidebar}
+        selectedSpeakers={selectedSpeakers}
+        setSelectedSpeakers={setSelectedSpeakers}
+        onSave={handleSave}
+      />
     </div>
   );
-}
+};
 
 export default App;
+
